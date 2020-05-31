@@ -4,6 +4,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/supernovel/slackbot/internal/book"
 )
@@ -13,7 +14,13 @@ func defaultHandler(responseWriter http.ResponseWriter, request *http.Request) {
 }
 
 func main() {
-	addr := ":8080"
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	addr := ":" + port
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", defaultHandler)
