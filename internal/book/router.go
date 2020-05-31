@@ -6,7 +6,8 @@ import (
 	"net/http"
 	"strings"
 
-	slack "github.com/supernovel/slackbot"
+	slack "github.com/slack-go/slack"
+	book "github.com/supernovel/slackbot/internal/book/models"
 )
 
 // Router : apply router for slack
@@ -44,7 +45,28 @@ func Router(mux *http.ServeMux) {
 		splitedText := strings.Split(slackCommand.Text, " ")
 
 		if splitedText[0] == "list" {
-			// TODO: Get book list from database
+			// TODO: Build book list from database
+			message, err := BuildBookListBlock(&[]book.Book{
+				{
+					ISBN:   "123124124123",
+					Title:  "kafka",
+					Author: "human",
+				},
+				{
+					ISBN:   "123124124123",
+					Title:  "prometheus",
+					Author: "robot",
+				},
+			}, 0, 2)
+
+			if err != nil {
+				responseWriter.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			responseWriter.Header().Set("Content-Type", "application/json")
+			responseWriter.Write(message)
+
 			return
 		}
 
