@@ -5,4 +5,4 @@ module github.com/supernovel/slackbot
 
 go 1.14
 
-require github.com/slack-go/slack v0.6.4
+require go.mongodb.org/mongo-driver v1.3.3
