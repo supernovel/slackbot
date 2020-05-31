@@ -13,7 +13,7 @@ func defaultHandler(responseWriter http.ResponseWriter, request *http.Request) {
 }
 
 func main() {
-	addr := ":80"
+	addr := ":8080"
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", defaultHandler)
