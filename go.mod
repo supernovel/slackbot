@@ -1,5 +1,5 @@
 // +heroku goVersion go1.14
-// +heroku install ./cmd/main.go
+// +heroku install ./cmd/server.go
 
 module github.com/supernovel/slackbot
 
