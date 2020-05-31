@@ -14,10 +14,11 @@ func defaultHandler(responseWriter http.ResponseWriter, request *http.Request) {
 
 func main() {
 	addr := ":8080"
+	mux := http.NewServeMux()
 
-	http.HandleFunc("/", defaultHandler)
-	book.Router()
+	mux.HandleFunc("/", defaultHandler)
+	book.Router(mux)
 
 	log.Printf("Listening... => %s", addr)
-	log.Fatal(http.ListenAndServe(addr, nil))
+	log.Fatal(http.ListenAndServe(addr, mux))
 }
