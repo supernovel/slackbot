@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"io"
 	"log"
 	"net/http"
@@ -14,6 +15,8 @@ func defaultHandler(responseWriter http.ResponseWriter, request *http.Request) {
 }
 
 func main() {
+	godotenv.Load()
+
 	port := os.Getenv("PORT")
 
 	if port == "" {
